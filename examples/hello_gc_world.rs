@@ -1,6 +1,6 @@
 extern crate boehm_gc;
 
-use boehm_gc::Gc;
+use boehm_gc::{Gc, heap_size};
 use std::mem;
 
 fn main() {
@@ -70,14 +70,18 @@ macro_rules! chain_fn {
             const NAME: &'static str = stringify!($chain_fn);
             println!("{}", stringify!($name));
             let mut i: usize = 1;
+            println!("{:>10} {:10} {:5} {:11}",
+                     NAME, "start", i, "heap_size()");
             while i < ITERS {
-                if i % 100 == 0 { println!("{:>10} iteration {:5}", NAME, i); }
+                if i < 5 || i % 100 == 0 { println!("{:>10} {:10} {:5} {:11}",
+                                                    NAME, "iteration", i, heap_size()); }
                 i += 1;
                 $(
                     chain_body!(i, $elem_len, $chain_fn);
-                )*
+                    )*
             }
-            { println!("{:>10} finished  {:5}", NAME, i); }
+            println!("{:>10} {:10} {:5} {:11}",
+                     NAME, "finished", i, heap_size());
         }
     }
 }
