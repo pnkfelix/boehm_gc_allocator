@@ -1,4 +1,4 @@
-#![feature(allocator, no_std, libc)]
+#![feature(allocator, no_std, libc, core_intrinsics, nonzero)]
 #![allocator]
 #![crate_type = "rlib"]
 #![no_std]
@@ -14,6 +14,9 @@
 extern crate libc;
 
 mod sys;
+mod gc_ref;
+
+pub use gc_ref::{Gc, GC};
 
 use core::mem;
 use core::ptr;
