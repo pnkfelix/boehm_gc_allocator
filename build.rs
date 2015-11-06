@@ -25,10 +25,17 @@ fn main() {
     }
     assert!(cmd_output.status.success());
 
+    // let make_cflags = "CFLAGS= -DGC_DEBUG -DGC_ALWAYS_MULTITHREADED -DGC_DISCOVER_TASK_THREADS -DDEBUG_THREADS";
+    let make_cflags = "CFLAGS= -DGC_DEBUG -DGC_ALWAYS_MULTITHREADED -DGC_DISCOVER_TASK_THREADS ";
+    // let make_cflags = "CFLAGS= -DGC_ALWAYS_MULTITHREADED -DGC_DISCOVER_TASK_THREADS ";
+
+    // TODO: record the `make_cflags` that we used into a file
+    // somewhere in the out_dir as well, and if there's a future
+    // mismatch, then do a `make clean` before the `make`.
+
     let mut cmd = Command::new("make");
     cmd.current_dir(out_dir.clone());
-    // cmd.arg("CFLAGS=-DGC_DEBUG -DGC_ALWAYS_MULTITHREADED -DGC_DISCOVER_TASK_THREADS -DDEBUG_THREADS");
-    cmd.arg("CFLAGS=-DGC_DEBUG -DGC_ALWAYS_MULTITHREADED -DDEBUG_THREADS");
+    cmd.arg(make_cflags);
     let cmd_output = cmd.output().unwrap();
     if !cmd_output.status.success() {
         writeln!(&mut std::io::stderr(), "make status: {}", cmd_output.status);
