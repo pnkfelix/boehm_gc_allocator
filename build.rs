@@ -43,6 +43,7 @@ fn main() {
     libgc_a.push("libgc.a");
     assert!(fs::metadata(libgc_a).unwrap().is_file());
 
+    println!("cargo:rustc-link-lib=static=gc");
     println!("cargo:rustc-link-search=native={}", libs_dir.display());
 }
 
