@@ -4,3 +4,9 @@ version = "0.1.0"
 authors = ["swgillespie <sean.william.g@gmail.com>"]
 
 build = "build.rs"
+
+[[test]]
+name = "smoketest"
+
+# Intercept the injected test harness so that we can control thread creation.
+harness = false
