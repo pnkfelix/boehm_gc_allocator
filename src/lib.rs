@@ -185,3 +185,22 @@ pub fn gc_disable() {
 pub fn set_oom_fn(oom_fn: extern "C" fn(size_t) -> *mut u8) {
     unsafe { sys::GC_oom_fn = mem::transmute(oom_fn); }
 }
+
+/// Currently must call this yourself at start of your program to
+/// ensure that your threads are automatically discovered.
+#[inline]
+pub fn use_threads_discovery() {
+    unsafe { sys::GC_use_threads_discovery(); }
+}
+
+#[inline]
+pub fn gc_allow_register_threads() {
+    unsafe { sys::GC_allow_register_threads(); }
+}
+
+#[inline]
+pub unsafe fn gc_register_myself() {
+    let mut addr = 0;
+    let base: *mut c_void = &mut addr as *mut i32 as *mut _;
+    sys::GC_register_my_thread(&sys::GcStackBase { mem_base: base });
+}

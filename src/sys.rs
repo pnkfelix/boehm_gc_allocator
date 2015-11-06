@@ -1,6 +1,6 @@
-use libc::{size_t, c_void};
+use libc::{size_t, c_void, c_int};
 
-#[link(name = "gc")]
+// #[link(name = "gc")]
 extern {
     pub static mut GC_oom_fn : extern "C" fn(size_t) -> !;
 
@@ -30,4 +30,8 @@ extern {
     pub fn GC_get_total_bytes() -> size_t;
     pub fn GC_disable();
     pub fn GC_enable();
+    pub fn GC_use_threads_discovery();
+    pub fn GC_allow_register_threads();
+    pub fn GC_register_my_thread(base: *const GcStackBase) -> c_int;
 }
+pub struct GcStackBase { pub mem_base: *mut c_void }
