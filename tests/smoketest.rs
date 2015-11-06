@@ -14,8 +14,8 @@ macro_rules! test {
 }
 fn main() {
     // boehm_gc::use_threads_discovery();
-    unsafe { boehm_gc::gc_allow_register_threads(); }
-    ::std::thread::at_start(|| { unsafe { boehm_gc::gc_register_myself(); } });
+    // unsafe { boehm_gc::gc_allow_register_threads(); }
+    // ::std::thread::at_start(|| { unsafe { boehm_gc::gc_register_myself(); } });
 
     let tests = vec![test!(hello_gc_alloc)];
     let args: Vec<_> = env::args().collect();
