@@ -21,7 +21,9 @@ fn main() {
     // This works but is unnnecessary with our own private build of libgc, which
     // has GC_ALWAYS_MULTITHREADED turned on when it is built.
     //
-    // unsafe { boehm_gc::gc_allow_register_threads(); }
+    // Well, on Linux, it seeems that GC_ALWAYS_MULTITHREADED does not remove the need to
+    // call this.
+    unsafe { boehm_gc::gc_allow_register_threads(); }
 
     // This is probably what we want to encourage others to do, but it requires
     // std::thread::at_start, which is not part of Rust.
