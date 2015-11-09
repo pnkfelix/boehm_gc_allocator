@@ -81,7 +81,7 @@ stamp-h1
 #/config.guess
 #/config.sub
 #/configure
-/depcomp
+#/depcomp
 #/include/config.h.in
 #/install-sh
 /ltmain.sh
