@@ -70,7 +70,7 @@ fn main() {
     let libgc_a_metadata = libgc_a_metadata.unwrap();
     assert!(libgc_a_metadata.is_file());
 
-    println!("cargo:rustc-link-lib=static=gc");
+    println!("cargo:rustc-link-lib=gc");
     println!("cargo:rustc-link-search=native={}", libs_dir.display());
 }
 
