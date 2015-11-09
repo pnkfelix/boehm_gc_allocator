@@ -23,13 +23,13 @@ fn main() {
     // println!("configure_path: {:?}", configure_path);
     // println!("out_dir: {:?}", out_dir);
 
-    let mut cmd = Command::new(configure_path);
+    let mut cmd = Command::new(configure_path.clone());
     cmd.current_dir(out_dir.clone());
     let cmd_output = cmd.output();
     if let Err(ref err) = cmd_output {
         printerr!("build no cmd_output: {:?}", err);
         printerr!("configure_path: {}", configure_path.display());
-        printerr!("out_dir: {}", out_dir.display());
+        printerr!("out_dir: {}", out_dir);
     }
     let cmd_output = cmd_output.unwrap();
     if !cmd_output.status.success() {
