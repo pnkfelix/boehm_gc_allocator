@@ -80,7 +80,7 @@ stamp-h1
 /compile
 /config.guess
 /config.sub
-/configure
+#/configure
 /depcomp
 /include/config.h.in
 /install-sh
